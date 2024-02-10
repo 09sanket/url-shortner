@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h2>DashBoard</h2>
+
+    <% if (locals.id) { %> 
+        <p>URL Generated: http://localhost:8001/url/<%= id %> </p>
+  <%  } %>
+
+    <div>
+        <form method="POST" action="/url">
+            <label>Enter Your Orignal URL</label>
+            <input type="text" name ="url" placeholder="https://enter your url">
+            <button type=" submit ">Generate</button>
+        </form>
+    </div>
+    <div>
+        <% if (locals.urls) { %>
+            <table style="border-collapse: collapse; width: 100%;">
+                <thead>
+                    <tr style="background-color: #f0f0f0;">
+                        <th style="padding: 8px; border: 1px solid #ccc;">S.NO</th>
+                        <th style="padding: 8px; border: 1px solid #ccc;">Redirect</th>
+                        <th style="padding: 8px; border: 1px solid #ccc;">Clicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => { %>
+                        <tr style="background-color: #fff;">
+                            <td style="padding: 8px; border: 1px solid #ccc;"><%= index + 1 %></td>
+                            <td style="padding: 8px; border: 1px solid #ccc;"><%= url.redirectURL %></td>
+                            <td style="padding: 8px; border: 1px solid #ccc;"><%= url.visitHistory.length %></td>
+                        </tr>
+                        <!-- Add space between rows -->
+                        <tr style="height: 10px;"></tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+        
+    </div>
+</body>
+</html>
